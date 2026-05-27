@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="./css/bienvenido.css">
+</head>
+
+<body>
+    <div class="interface-container">
+        <div class="left-panel">
+            <div class="panel-header">
+                <h1 class="main-title">Bienvenido a <strong>BuildTrack</strong></h1>
+                <div class="logo-box">
+                    <div class="logo-circle">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5">
+                            <path d="M3 21h18M5 21V7l7-3 7 3v14M9 21v-4h6v4M8 10h2M14 10h2M8 14h2M14 14h2" />
+                        </svg>
+                    </div>
+                    <span>INFRADATA</span>
+                </div>
+            </div>
+            <p class="instruction-text">Inicia sesión para continuar</p>
+            
+            <div class="roles-grid">
+                <div class="card-role" onclick="window.location.href='./accesoadmin.html'">
+                    <svg class="badge-icon" viewBox="0 0 24 24">
+                        <path d="M12 2a10 10 0 0 0-10 10v1h20v-1A10 10 0 0 0 12 2zm-6 13h12v2H6v-2z" />
+                    </svg>
+                    <div class="avatar-holder">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&hairColor=2c1a04&accessories=prescription02"
+                            alt="Administrador">
+                    </div>
+                    <h3>Administrador</h3>
+                    <p>Acceso al panel de administración</p>
+                </div>
+
+                <div class="card-role" onclick="window.location.href='./accesocliente.html'">
+                    <svg class="badge-icon" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                    <div class="avatar-holder">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka&clothingColor=e05e1a"
+                            alt="Cliente">
+                    </div>
+                    <h3>Cliente</h3>
+                    <p>Acceso al seguimiento de tu proyecto</p>
+                </div>
+            </div>
+
+            <div class="action-footer">
+                <a href="./paginaprincipal.html" class="btn-return">Regresar a página principal</a>
+            </div>
+        </div>
+        <div class="right-panel"></div>
+    </div>
+</body>
+
+</html>
