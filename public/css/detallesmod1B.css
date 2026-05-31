@@ -1,0 +1,259 @@
+/* ---- Configuración General ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #D1D5DB; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ---- Encabezado ---- */
+.barra-superior {
+    background-color: #2A3B4C; 
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    background-color: #E29513; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.texto-header h1 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.texto-header p {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.boton-home {
+    background-color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+}
+
+.linea-naranja {
+    height: 12px;
+    background-color: #E29513;
+}
+
+/* ---- Área de Contenido Principal ---- */
+.contenedor-detalles {
+    padding: 30px 40px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta-blanca-detalles {
+    background-color: white;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- Grid de Información Principal (Imagen Izquierda, Listas Derecha) ---- */
+.grid-informacion {
+    display: grid;
+    grid-template-columns: 1.1fr 2fr;
+    gap: 40px;
+    padding: 30px;
+    height: 520px; /* Controla la altura fija para que el scroll interno funcione correctamente */
+}
+
+.columna-imagen {
+    width: 100%;
+    height: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.columna-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---- Contenedor Derecho: Configurado en 2 Subcolumnas Paralelas ---- */
+.columna-especificaciones {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide el espacio exactamente en dos bloques de igual tamaño */
+    gap: 30px; /* Separación horizontal elegante entre ambas subcolumnas */
+    overflow-y: auto; /* Mantiene el scroll activo si las especificaciones descienden demasiado */
+    padding-right: 15px;
+}
+
+/* ---- Estilos de los bloques de especificaciones individuales ---- */
+.bloque-info {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #E5E7EB; /* Línea divisoria gris tenue de Figma */
+}
+
+/* Estilo del título técnico de cada sección */
+.bloque-info h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.bloque-info ul {
+    list-style: none;
+    padding-left: 15px;
+}
+
+.bloque-info ul li {
+    font-size: 13px;
+    color: #4B5563;
+    margin-bottom: 6px;
+    position: relative;
+    line-height: 1.4;
+}
+
+/* Viñetas personalizadas sutiles hechas con pseudo-elementos */
+.bloque-info ul li::before {
+    content: "•";
+    color: #9CA3AF;
+    font-size: 14px;
+    position: absolute;
+    left: -15px;
+    top: -1px;
+}
+
+/* ---- Diseño personalizado para la barra de Scroll interna ---- */
+.columna-especificaciones::-webkit-scrollbar {
+    width: 6px;
+}
+
+.columna-especificaciones::-webkit-scrollbar-track {
+    background: #F3F4F6;
+    border-radius: 10px;
+}
+
+.columna-especificaciones::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 10px;
+}
+
+.columna-especificaciones::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* ---- Sección de Acción de la Tarjeta (Precio y Botón) ---- */
+.tarjeta-accion-footer {
+    border-top: 1px solid #E5E7EB;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FAFAFA;
+}
+
+.precio-detalle {
+    font-size: 32px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.btn-seleccionar {
+    background-color: #E29513;
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-seleccionar:hover {
+    background-color: #c9820f;
+}
+
+/* ---- Footer Global ---- */
+.barra-inferior {
+    background-color: #2A3B4C;
+    margin-top: auto;
+}
+
+.linea-naranja-inferior {
+    height: 12px;
+    background-color: #E29513;
+}
+
+.contenedor-regresar {
+    padding: 15px 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-regresar {
+    background-color: #E29513;
+    color: white;
+    border: none;
+    padding: 10px 35px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-regresar:hover {
+    background-color: #c9820f;
+}
+
+/* ---- Vista Responsiva (Pantallas Medianas/Chicas) ---- */
+@media (max-width: 950px) {
+    .grid-informacion {
+        grid-template-columns: 1fr;
+        height: auto; /* Deja que el contenedor se estire de forma natural en móviles */
+    }
+    
+    .columna-imagen {
+        width: 100%;
+        height: 250px;
+    }
+    
+    .columna-especificaciones {
+        grid-template-columns: 1fr; /* Colapsa a una columna en móviles para una lectura cómoda */
+        max-height: none;
+        overflow-y: visible;
+    }
+}
