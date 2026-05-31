@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; background: #eee; }
+.user-info { display: flex; align-items: center; }
+.user-info h1 { font-size: 1.4rem; margin: 0; }
+.user-info p { margin: 0; opacity: 0.8; }
+
+.orange-bar {
+    background-color: #e67e22;
+    height: 12px;
+    width: 100%;
+}
+
+.container {
+    flex: 1; /* Esto empuja el footer hacia abajo */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    width: 95%;
+    max-width: 1100px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.content-split {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.image-section img {
+    width: 300px;
+    border-radius: 10px;
+    position: sticky; /* La imagen se queda a la vista mientras haces scroll */
+    top: 20px;
+}
+
+.info-section {
+    display: flex;
+    gap: 40px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.list-column h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #e67e22;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.list-column ul {
+    padding-left: 18px;
+    list-style-type: disc;
+}
+
+.footer-card {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price { font-size: 2rem; font-weight: bold; color: #333; }
+
+.select-btn, .back-btn {
+    background-color: #d4a017;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Arreglo del Footer */
+.bottom-area {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.footer-dark-blue {
+    background-color: #2c3e50;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.home-btn {
+    background: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
