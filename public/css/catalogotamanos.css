@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #D1D5DB; 
+    background-color: #D1D5DB; /* Gris de fondo general */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -15,7 +15,7 @@ body {
 
 /* ---- Encabezado ---- */
 .barra-superior {
-    background-color: #2A3B4C; 
+    background-color: #2A3B4C; /* Azul oscuro */
     color: white;
     padding: 15px 40px;
     display: flex;
@@ -32,12 +32,13 @@ body {
 .avatar {
     width: 55px;
     height: 55px;
-    background-color: #E29513; 
+    background-color: #E29513; /* Círculo naranja de la foto */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    overflow: hidden;
 }
 
 .texto-header h1 {
@@ -67,96 +68,96 @@ body {
     background-color: #E29513;
 }
 
-/* ---- Grid de Variantes (3 Columnas) ---- */
-.contenedor-variantes {
+/* ---- Cuadrícula del Catálogo ---- */
+.contenedor-catalogo {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 40px;
-    padding: 50px 40px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+    gap: 30px;
+    padding: 40px;
     flex-grow: 1;
-    align-items: center;
 }
 
-/* ---- Tarjetas ---- */
-.tarjeta-variante {
+/* ---- Tarjetas de los Modelos ---- */
+.tarjeta-modelo {
     background-color: white;
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    max-height: 450px;
-}
-
-.contenedor-img {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
     border-radius: 20px;
-    margin-bottom: 15px;
+    display: flex; /* Divide imagen a la izquierda y texto a la derecha */
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    align-items: center;
+    gap: 20px;
 }
 
-.contenedor-img img {
+.columna-imagen {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.columna-imagen img {
     width: 100%;
-    height: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 15px;
     object-fit: cover;
 }
 
-.info-variante {
-    padding: 5px 10px;
-}
-
-.info-variante h3 {
-    font-size: 16px;
-    color: #4B5563;
-    margin-bottom: 15px;
-}
-
-.precio {
-    font-size: 26px;
-    font-weight: bold;
-    color: #111827;
-    margin-bottom: 15px;
-}
-
-.linea-divisoria {
-    height: 1px;
-    background-color: #E5E7EB;
-    margin-bottom: 15px;
-}
-
-/* ---- Pie de Tarjeta ---- */
-.pie-tarjeta {
+.columna-texto {
+    flex: 1.2;
     display: flex;
+    flex-direction: column;
+    height: 100%;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
+    border-left: 1px solid #E5E7EB; /* Línea divisoria vertical */
+    padding-left: 20px;
 }
 
-.pie-tarjeta span {
-    font-size: 16px;
+.columna-texto h3 {
+    font-size: 14px;
     color: #111827;
+    margin-bottom: 10px;
 }
 
-.btn-accion {
+.columna-texto ul {
+    list-style: none;
+    font-size: 11px;
+    color: #374151;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.columna-texto ul li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 10px;
+}
+
+/* Puntito de la lista */
+.columna-texto ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #000;
+}
+
+/* ---- Botones ---- */
+.btn-siguiente {
     background-color: #E29513;
     color: white;
     border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
     cursor: pointer;
+    align-self: flex-end; /* Lo avienta a la derecha */
     transition: background 0.2s;
 }
 
-.btn-accion:hover {
+.btn-siguiente:hover {
     background-color: #c9820f;
 }
 
-/* ---- Footer ---- */
+/* ---- Footer / Barra Inferior ---- */
 .barra-inferior {
     background-color: #2A3B4C;
     margin-top: auto;
@@ -171,11 +172,6 @@ body {
     padding: 15px 40px;
     display: flex;
     justify-content: flex-end;
-}
-
-.contenedor-regresar a {
-    text-decoration: none;
-    display: inline-block;
 }
 
 .btn-regresar {
@@ -193,10 +189,9 @@ body {
     background-color: #c9820f;
 }
 
-/* ---- Responsivo ---- */
-@media (max-width: 1024px) {
-    .contenedor-variantes {
-        grid-template-columns: 1fr; 
-        gap: 25px;
+/* ---- Ajuste para pantallas más chicas ---- */
+@media (max-width: 900px) {
+    .contenedor-catalogo {
+        grid-template-columns: 1fr; /* 1 sola columna si la pantalla se reduce */
     }
 }

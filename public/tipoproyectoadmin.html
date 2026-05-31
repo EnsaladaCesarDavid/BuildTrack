@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/tipoproyectoadmin.css">
+    <title>Modelos - BuildTrack</title>
+</head>
+<body>
+
+    <div class="barra-superior">
+        <div class="usuario-info">
+            <div class="avatar-circular">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&hairColor=2c1a04&accessories=prescription02" alt="Avatar Administrador">
+            </div>
+            <h2>Administrador</h2>
+        </div>
+        <a href="./bienvenido.html" class="icono-home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </a>
+    </div>
+
+    <div class="contenedor-layout">
+        <aside class="menu-lateral">
+            <h3 class="titulo-menu">Administración de proyectos</h3>
+            <ul class="lista-menu">
+                <li class="item-proyectos">
+                    <a href="#">Mis proyectos</a>
+                    <ul class="sublista-proyectos">
+                        <li>-//////</li>
+                        <li>-/////</li>
+                        <li>-////</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="grupo-botones-laterales">
+                <button class="btn-lateral"><a href="./gestionarproyecto.html">Gestionar Proyecto</a></button>
+            </div>
+        </aside>
+
+        <main class="contenido-panel">
+            <div class="seccion-formulario">
+                <h3 class="titulo-seccion">Crear nuevo proyecto</h3>
+                <div class="tarjeta-blanca">
+                    
+                    <div class="galeria-modelos">
+    <div class="tarjeta-modelo">
+        <div class="imagen-contenedor-modelo">
+            <img src="img/modelo1.png" alt="Modelo 1">
+        </div>
+        <button class="btn-seleccionar-modelo"><a href="./menuprincipaladmin.html">seleccionar modelo</a></button>
+    </div>
+
+    <div class="tarjeta-modelo">
+        <div class="imagen-contenedor-modelo">
+            <img src="img/modelo2.png" alt="Modelo 2">
+        </div>
+        <button class="btn-seleccionar-modelo"><a href="./menuprincipaladmin.html">seleccionar modelo</a></button>
+    </div>
+
+    <div class="tarjeta-modelo">
+        <div class="imagen-contenedor-modelo">
+            <img src="img/modelo3.png" alt="Modelo 3">
+        </div>
+        <button class="btn-seleccionar-modelo"><a href="./menuprincipaladmin.html">seleccionar modelo</a></button>
+    </div>
+
+    <div class="tarjeta-modelo">
+        <div class="imagen-contenedor-modelo">
+            <img src="img/modelo4.png" alt="Modelo 4">
+        </div>
+        <button class="btn-seleccionar-modelo"><a href="./menuprincipaladmin.html">seleccionar modelo</a></button>
+    </div>
+</div>
+                    <div class="seccion-coordinar-transporte">
+                        <div class="bloque-formulario-transporte">
+                            <h4 class="subtitulo-bloque">Cordinar transporte e instalación</h4>
+                            <form class="formulario-proyecto">
+                                <div class="campo-completo">
+                                    <label>Tipo de proyecto</label>
+                                    <div class="selector-personalizado">
+                                        <select required>
+                                            <option value="" disabled selected hidden>Selecciona el tipo de proyecto</option>
+                                            <option value="1">Estudio compartido</option>
+                                            <option value="2">Casa lineal</option>
+                                            <option value="3">Casa duplex</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="campo-completo">
+                                    <label>Fecha de Salida</label>
+                                    <input type="date" class="input-calendario">
+                                </div>
+                                <div class="campo-completo">
+                                    <label>Fecha de instalación</label>
+                                    <input type="date" class="input-calendario">
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="bloque-calendario-interactivo">
+                            <div class="mini-calendario-vista">
+                                <div class="mes-header">MAY 2026</div>
+                                <div class="dias-cuadricula">
+                                    <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                                    <span class="vacio"></span><span class="vacio"></span><span class="vacio"></span><span>1</span><span>2</span><span>3</span><span>4</span>
+                                    <span>5</span><span>6</span><span>7</span><span>8</span><span class="hoy">9</span><span>10</span><span>11</span>
+                                    <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="barra-inferior">
+        <a href="./menuprincipaladmin.html"><button class="btn-cerrar">Regresar</button></a>
+    </div>
+
+</body>
+</html>

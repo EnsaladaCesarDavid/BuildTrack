@@ -1,0 +1,353 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#233245;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.barra-superior-gestion{
+    width:100%;
+    height:80px;
+    background:#233245;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+}
+
+.barra-superior-gestion h2{
+    color:white;
+    font-size:2.5rem;
+    font-family:Georgia, serif;
+    font-weight:bold;
+}
+
+.badge-proyecto{
+    background:white;
+    color:#777;
+    padding:8px 40px;
+    border-radius:25px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+
+.contenedor-layout-gestion{
+    flex:1;
+    padding:0 50px 90px;
+}
+
+.dashboard-gestion{
+    background:#d9d9d9;
+    min-height:78vh;
+    padding:25px;
+}
+
+/* =========================
+   TITULO PROYECTO
+========================= */
+
+.titulo-proyecto{
+    margin-left:100px;
+    margin-bottom:30px;
+
+    font-size:3rem;
+    font-family:Georgia, serif;
+    font-weight:bold;
+
+    color:white;
+}
+
+.titulo-proyecto span{
+    color:#ff6a00;
+}
+
+/* =========================
+   TARJETAS (CORREGIDO Y ALINEADO)
+========================= */
+
+.contenedor-columnas-metricas{
+    display:flex;
+    justify-content:center;
+    align-items:stretch; /* Fuerza a que todas las columnas tengan exactamente la misma altura */
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.columna-metrica{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    flex: 1;
+    min-width: 210px; /* Hace las cajas un poco más anchas */
+    max-width: 250px; /* Evita que se estiren de más en pantallas gigantes */
+}
+
+.lbl-metrica{
+    color:#162334;
+    font-size:1.3rem;
+    font-weight:bold;
+    margin-bottom:12px;
+    text-align:center;
+    min-height: 50px; /* Reserva espacio para títulos de 1 o 2 líneas, evitando desalineaciones */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-metrica-interior{
+    width:100%;       /* Absorbe el nuevo ancho de la columna */
+    height:390px;     /* Caja un poco más alta y espaciosa */
+
+    background:black;
+    border-radius:35px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: flex-start;
+
+    padding:25px 15px; /* Más espacio interno */
+
+    color:white;
+}
+
+/* =========================
+   ICONOS
+========================= */
+
+.icono-metrica-circulo{
+    font-size:2.8rem;
+    margin-bottom:15px;
+}
+
+.icono-metrica-circulo-total{
+    font-size:2.8rem;
+    margin-bottom:15px;
+    color:#d99a1d;
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+.card-metrica-interior h3{
+    font-size:2rem;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.sub-porcentaje{
+    font-size:.8rem;
+    color:#d4d4d4;
+    margin-bottom:15px;
+}
+
+.monto-total{
+    color:#d99a1d;
+}
+
+/* =========================
+   BARRAS DE PROGRESO
+========================= */
+
+.barra-progreso{
+    width:90%;
+    height:6px;
+
+    background:#444;
+
+    border-radius:20px;
+
+    margin:15px 0;
+}
+
+.progreso{
+    height:100%;
+    background:#ff8c2b;
+    border-radius:20px;
+}
+
+.p18{
+    width:18%;
+}
+
+.p50{
+    width:50%;
+}
+
+.p100{
+    width:100%;
+}
+
+/* =========================
+   AVANCE (TEXTO ALINEADO)
+========================= */
+
+.lista-detalles-avance{
+    margin-top:15px;
+    width:100%;
+    font-size:.9rem;
+    line-height:1.8;
+    text-align: left;    /* Alinea la lista de progreso a la izquierda dentro de la tarjeta */
+    padding-left: 15px;  /* Le da un margen limpio */
+}
+
+/* =========================
+   IMAGENES
+========================= */
+
+.imagen-metrica-fondo{
+    width:100%;
+    height:140px;
+
+    margin-top:auto;
+
+    border-radius:25px;
+
+    background-size:cover;
+    background-position:center;
+}
+
+/* CAMBIA LAS RUTAS */
+
+.img-materiales{
+    background-image:url("../img/materiales.jpg");
+}
+
+.img-personal{
+    background-image:url("../img/personal.jpg");
+}
+
+.img-contrato{
+    background-image:url("../img/permiso.jpg");
+}
+
+.img-casa{
+    background-image:url("../img/casa.jpg");
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.barra-inferior-gestion{
+    width:100%;
+    height:70px;
+
+    background:#233245;
+
+    border-top:10px solid #ff6a00;
+
+    position:fixed;
+    bottom:0;
+    left:0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 50px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn-inferior-izq,
+.btn-cerrar{
+    background:#d99a1d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:30px;
+
+    padding:12px 35px;
+
+    font-size:1rem;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn-inferior-izq:hover,
+.btn-cerrar:hover{
+    background:#c9870d;
+}
+
+.btn-cerrar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* =========================
+   RESPONSIVE (ADAPTADO AL NUEVO ANCHO)
+========================= */
+
+@media(max-width:1200px){
+
+    .contenedor-columnas-metricas{
+        gap:15px;
+    }
+
+    .columna-metrica {
+        min-width: 180px;
+    }
+}
+
+@media(max-width:992px){
+
+    .barra-superior-gestion h2{
+        font-size:2rem;
+    }
+
+    .contenedor-columnas-metricas{
+        justify-content:center;
+    }
+}
+
+@media(max-width:768px){
+
+    .barra-superior-gestion{
+        padding:15px;
+    }
+
+    .contenedor-layout-gestion{
+        padding:15px 15px 100px;
+    }
+
+    .barra-inferior-gestion{
+        padding:0 15px;
+    }
+
+    .titulo-proyecto{
+        margin-left:0;
+        text-align:center;
+        font-size:2.2rem;
+    }
+}
