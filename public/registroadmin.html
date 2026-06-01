@@ -13,17 +13,17 @@
     
     <div class="contenedor-principal">
         <div class="seccion-formulario">
-            <form>
-                <input type="text" class="entrada" placeholder="Nombre de Usuario" required>
-                <input type="email" class="entrada" placeholder="Correo Electrónico" required>
-                <input type="text" class="entrada" placeholder="Contraseña" required>
+            <form id="formulario">
+                <input type="text" id="nombre" class="entrada" placeholder="Nombre de Usuario" required>
+                <input type="email" id="email" class="entrada" placeholder="Correo Electrónico" required>
+                <input type="text" id="password" class="entrada" placeholder="Contraseña" required>
             </form>
         </div>
 
         <div class="tarjeta-ilustracion">
             <h3>Lic. CASH</h3>
             <div class="contenedor-imagen">
-                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=cash&backgroundColor=222e3c" alt="Lic. Cash">
+                <img src="./img/liccash.png" alt="Lic. Cash">
             </div>
         </div>
     </div>
@@ -32,5 +32,7 @@
         <a href="./accesoadmin.html"><button>Regresar</button></a>
         <button type="button" id="btn-enviar" class="btn-registro" onclick="">Completar Registro</button>
     </div>
+
+    <script src="./js/registroadmin.js"></script>
 </body>
 </html>

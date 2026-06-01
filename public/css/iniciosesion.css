@@ -152,6 +152,12 @@ body {
     transform: translateY(-1px);
 }
 
+.btn-inicio-sesion a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
 @media (max-width: 500px) {
     .contenedor-principal h3 {
         font-size: 2.2rem;
