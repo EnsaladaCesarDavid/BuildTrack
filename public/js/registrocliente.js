@@ -33,6 +33,23 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
         return;
     }
 
-    alert("Registro exitoso");
-    window.location.href = "./menuprincipalcliente.html";
+    fetch('http://localhost:3000/api/registro-cliente', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre, email, telefono, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert(data.mensaje);
+            window.location.href = "./menuprincipalcliente.html";
+        }
+    })
+    .catch(error => {
+        alert("Error de conexión con el servidor");
+    });
 });

@@ -26,6 +26,23 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
         return;
     }
 
-    alert("Registro exitoso");
-    window.location.href = "./menuprincipaladmin.html";
+    fetch('http://localhost:3000/api/registro-admin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre, email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert(data.mensaje);
+            window.location.href = "./menuprincipaladmin.html";
+        }
+    })
+    .catch(error => {
+        alert("Error de conexión con el servidor");
+    });
 });

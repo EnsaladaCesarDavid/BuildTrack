@@ -28,9 +28,11 @@
             <ul class="lista-menu">
                 <li><a href="./catalogotamanos.html">Ver catálogo</a></li>
                 <li class="item-proyectos">
-                    <p>Mis proyectos</p>
-                    <ul id="sublista-proyectos">
-
+                    <div class="contenedor-proyectos-header">
+                        <p>Mis proyectos</p>
+                        <button type="button" id="btn-agregar-proyecto" class="btn-mas">+</button>
+                    </div>
+                    <ul id="sublista-proyectos" class="lista-scrollable">
                     </ul>
                 </li>
             </ul>
@@ -48,5 +50,6 @@
         <a href="./iniciosesioncliente.html"><button class="btn-cerrar">Cerrar Sesion</button></a>
     </div>
 
+    <script src="./js/proyectoscliente.js"></script>
 </body>
 </html>

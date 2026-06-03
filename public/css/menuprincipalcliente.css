@@ -80,6 +80,51 @@ body {
     padding-bottom: 65px;
 }
 
+.contenedor-proyectos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-mas {
+    background-color: #d97706;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mas:hover {
+    background-color: #b45309;
+}
+
+.lista-scrollable {
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 15px;
+    margin-top: 5px;
+    list-style-type: none;
+}
+
+.lista-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-scrollable::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
 .menu-lateral {
     width: 260px;
     background-color: #222e3c;

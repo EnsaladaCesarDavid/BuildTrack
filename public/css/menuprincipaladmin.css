@@ -144,6 +144,24 @@ a{
     letter-spacing: 1px;
 }
 
+.lista-scrollable-admin {
+    max-height: 140px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 15px;
+    margin-top: 5px;
+    list-style-type: none;
+}
+
+.lista-scrollable-admin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-scrollable-admin::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
 .grupo-botones-laterales {
     margin-top: auto;
     display: flex;
@@ -216,6 +234,26 @@ a{
 
 .formulario-proyecto input::placeholder {
     color: #94a3b8;
+}
+
+.contenedor-prefijo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.prefijo-moneda {
+    position: absolute;
+    left: 20px;
+    color: #4b5563;
+    font-size: 0.95rem;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.contenedor-prefijo input {
+    padding-left: 35px !important;
 }
 
 .selector-personalizado {
