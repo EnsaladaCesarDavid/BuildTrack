@@ -48,7 +48,15 @@
                     </div>
                     
                     <div class="campo-completo">
-                        <label><a href="./tipoproyectoadmin.html">Tipo de proyecto</a></label>
+                        <label>Tipo de proyecto</label>
+                        <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px;">
+                            <a href="./tipoproyectoadmin.html" id="link-tipo-proyecto" class="btn-lateral" style="text-decoration: none; text-align: center; width: auto; padding: 10px 20px; display: inline-block;">
+                                Configurar Modelo y Transporte
+                            </a>
+                            <span id="txt-modelo-seleccionado" style="font-size: 0.9rem; color: #64748b; font-style: italic; transition: color 0.3s ease;">
+                                (Ningún modelo seleccionado)
+                            </span>
+                        </div>
                     </div>
 
                     <div class="fila-campos">
@@ -70,8 +78,9 @@
                         </div>
                     </div>
                     
-                    <div class="campo-completo" style="margin-top: 15px;">
-                        <button type="submit" class="btn-lateral" style="width: 100%;">Guardar Proyecto</button>
+                    <div class="campo-completo" style="margin-top: 15px; display: flex; gap: 10px;">
+                        <button type="submit" class="btn-lateral" style="width: 50%;">Guardar Proyecto</button>
+                        <button type="button" id="btn-borrar-datos" class="btn-lateral" style="width: 50%; background-color: #ef4444; color: #ffffff;">Borrar Datos</button>
                     </div>
                 </form>
             </div>

@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/gestionarproyecto.css">
     <title>Gestión de Proyecto - BuildTrack</title>
+    <style>
+        .titulo-metrica {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .subtitulo-metrica {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-bottom: 8px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
     <div class="barra-superior-gestion">
         <h2>Gestión de Proyecto</h2>
-        <div class="badge-proyecto">id_proyecto</div>
+        <div class="badge-proyecto" id="proyecto-id-badge">PROJ-88231</div>
     </div>
 
     <div class="contenedor-layout-gestion">
@@ -18,66 +34,74 @@
             
             <div class="contenedor-columnas-metricas">
                 <div class="columna-metrica">
-                    <span class="lbl-metrica">Material</span>
+                    <h4 class="subtitulo-metrica">Material</h4>
                     <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo">📦</div>
-                        <h3>$180,000</h3>
-                        <p class="sub-porcentaje">18% del presupuesto</p>
+                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">📦</div>
+                        <div class="control-input-gestion">
+                            <label>Monto:</label>
+                            <input type="number" id="input-material" min="0">
+                        </div>
+                        <p class="sub-porcentaje" id="txt-pct-material">0% del presupuesto</p>
                         <div class="imagen-metrica-fondo img-materiales"></div>
                     </div>
                 </div>
 
                 <div class="columna-metrica">
-                    <span class="lbl-metrica">Presupuesto</span>
+                    <h3 class="titulo-metrica">Gastos <br><small style="font-size:0.85rem; font-weight:normal; color: #64748b;">Permisos</small></h3>
                     <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo">👥</div>
-                        <h3>$500,000</h3>
-                        <p class="sub-porcentaje">Total de Presupuesto</p>
-                        <div class="imagen-metrica-fondo img-personal"></div>
-                    </div>
-                </div>
-
-                <div class="columna-metrica">
-                    <span class="lbl-metrica">Gastos <br><small style="font-size:0.85rem; font-weight:normal;">Permisos</small></span>
-                    <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo">📄</div>
-                        <h3>$50,000</h3>
-                        <p class="sub-porcentaje">5 de 5 completados</p>
+                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">📋</div>
+                        <div class="control-input-gestion">
+                            <label>Monto:</label>
+                            <input type="number" id="input-gastos" min="0">
+                        </div>
+                        <p class="sub-porcentaje" id="txt-pct-gastos">0% del presupuesto</p>
                         <div class="imagen-metrica-fondo img-contrato"></div>
                     </div>
                 </div>
 
                 <div class="columna-metrica">
-                    <span class="lbl-metrica">Avance de la vivienda</span>
+                    <h4 class="subtitulo-metrica">Avance de la vivienda</h4>
                     <div class="card-metrica-interior items-lista-avance">
-                        <div class="icono-metrica-circulo">📋</div>
-                        <h3>$230,000</h3>
-                        <p class="sub-porcentaje">50% de Progreso</p>
+                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">🏠</div>
+                        <p class="sub-porcentaje" id="txt-pct-avance" style="font-size: 1.1rem; margin-top: 15px; margin-bottom: 15px;">0% de Progreso Promedio</p>
                         <div class="lista-detalles-avance">
-                            <p>-Cimentacion 100%</p>
-                            <p>-Muros 75%</p>
-                            <p>-Piso 100%</p>
+                            <div class="item-porcentaje-fila">
+                                <label>Cimentación:</label>
+                                <input type="number" id="input-pct-cimentacion" min="0" max="100">%
+                            </div>
+                            <div class="item-porcentaje-fila">
+                                <label>Muros:</label>
+                                <input type="number" id="input-pct-muros" min="0" max="100">%
+                            </div>
+                            <div class="item-porcentaje-fila">
+                                <label>Piso:</label>
+                                <input type="number" id="input-pct-piso" min="0" max="100">%
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="columna-metrica">
-                    <span class="lbl-metrica">Total</span>
+                    <h3 class="titulo-metrica">Presupuesto</h3>
                     <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo-total">💲</div>
-                        <h3>Total</h3>
-                        <h3 class="monto-total">$250,000</h3>
-                        <p class="sub-porcentaje">50% del presupuesto</p>
-                        <div class="imagen-metrica-fondo img-casa"></div>
+                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">💰</div>
+                        <div class="control-input-gestion">
+                            <label>Total:</label>
+                            <input type="number" id="input-presupuesto" value="500000" min="1">
+                        </div>
+                        <p class="sub-porcentaje">Total de Presupuesto</p>
+                        <div class="imagen-metrica-fondo img-personal"></div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <div class="barra-inferior-gestion">
-        <button class="btn-cerrar"><a href="menuprincipaladmin.html">Regresar</a></button>
+    <div class="barra-inferior-gestion" style="display: flex; gap: 15px; justify-content: center; align-items: center;">
+        <button type="button" id="btn-guardar-metricas" class="btn-cerrar" style="background-color: #d97706; color: #ffffff; cursor: pointer;">Guardar Cambios</button>
+        <button class="btn-cerrar"><a href="menuprincipaladmin.html" style="color: inherit; text-decoration: none;">Regresar</a></button>
     </div>
 
+    <script src="./js/gestionarproyecto.js"></script>
 </body>
 </html>

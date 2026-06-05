@@ -1,3 +1,42 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const datosTemporales = localStorage.getItem('proyecto_temporal');
+    if (datosTemporales) {
+        const datos = JSON.parse(datosTemporales);
+        
+        if (datos.nombre) document.getElementById('proj-nombre').value = datos.nombre;
+        if (datos.fecha_inicio) document.getElementById('proj-inicio').value = datos.fecha_inicio;
+        if (datos.fecha_fin) document.getElementById('proj-fin').value = datos.fecha_fin;
+        if (datos.presupuesto) document.getElementById('proj-presupuesto').value = datos.presupuesto;
+        
+        if (datos.tipo_proyecto_texto) {
+            const indicador = document.getElementById('txt-modelo-seleccionado');
+            if (indicador) {
+                indicador.textContent = `✓ Seleccionado: ${datos.tipo_proyecto_texto}`;
+                indicador.style.color = "#059669";
+                indicador.style.fontWeight = "bold";
+            }
+        }
+    }
+});
+
+document.getElementById('link-tipo-proyecto').addEventListener('click', function(e) {
+    const nombre = document.getElementById('proj-nombre').value.trim();
+    const fecha_inicio = document.getElementById('proj-inicio').value;
+    const fecha_fin = document.getElementById('proj-fin').value;
+    const presupuesto = document.getElementById('proj-presupuesto').value.trim();
+
+    let datosExistentes = {};
+    const temporal = localStorage.getItem('proyecto_temporal');
+    if (temporal) datosExistentes = JSON.parse(temporal);
+
+    datosExistentes.nombre = nombre;
+    datosExistentes.fecha_inicio = fecha_inicio;
+    datosExistentes.fecha_fin = fecha_fin;
+    datosExistentes.presupuesto = presupuesto;
+
+    localStorage.setItem('proyecto_temporal', JSON.stringify(datosExistentes));
+});
+
 document.getElementById('proj-presupuesto').addEventListener('blur', function() {
     let valor = this.value.trim();
     if (valor !== '' && !isNaN(valor)) {
@@ -13,8 +52,17 @@ document.getElementById('form-nuevo-proyecto').addEventListener('submit', functi
     const fecha_fin_str = document.getElementById('proj-fin').value;
     const presupuesto = document.getElementById('proj-presupuesto').value.trim();
 
+    // Obtener información adicional de transporte que guardamos en localStorage
+    const temporal = localStorage.getItem('proyecto_temporal');
+    let datosAdicionales = temporal ? JSON.parse(temporal) : {};
+
     if (!nombre || !fecha_inicio_str || !fecha_fin_str || !presupuesto) {
         alert("Por favor, rellena todos los campos del proyecto.");
+        return;
+    }
+
+    if (!datosAdicionales.tipo_proyecto_id) {
+        alert("Por favor, debes hacer clic en 'Configurar Modelo y Transporte' para asociar el tipo de proyecto e instalación antes de guardar.");
         return;
     }
 
@@ -55,12 +103,22 @@ document.getElementById('form-nuevo-proyecto').addEventListener('submit', functi
         return;
     }
 
+    const payload = {
+        nombre: nombre,
+        fecha_inicio: fecha_inicio_str,
+        fecha_fin: fecha_fin_str,
+        presupuesto: presupuesto,
+        tipo_proyecto_id: datosAdicionales.tipo_proyecto_id,
+        fecha_salida_transporte: datosAdicionales.fecha_salida,
+        fecha_instalacion_transporte: datosAdicionales.fecha_instalacion
+    };
+
     fetch('http://localhost:3000/api/crear-proyecto', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ nombre, fecha_inicio: fecha_inicio_str, fecha_fin: fecha_fin_str, presupuesto })
+        body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
@@ -68,15 +126,41 @@ document.getElementById('form-nuevo-proyecto').addEventListener('submit', functi
             alert(data.error);
         } else {
             alert(`¡Proyecto creado con éxito!\nCódigo asignado: ${data.id}`);
+
             const sublistaAdmin = document.getElementById('sublista-proyectos-admin');
-            const nuevoElemento = document.createElement('li');
-            nuevoElemento.textContent = `- ${nombre}`;
-            sublistaAdmin.appendChild(nuevoElemento);
+            if (sublistaAdmin) {
+                const nuevoElemento = document.createElement('li');
+                nuevoElemento.textContent = `- ${nombre}`;
+                sublistaAdmin.appendChild(nuevoElemento);
+            }
 
             document.getElementById('form-nuevo-proyecto').reset();
+            localStorage.removeItem('proyecto_temporal');
+            
+            const indicador = document.getElementById('txt-modelo-seleccionado');
+            if (indicador) {
+                indicador.textContent = "(Ningún modelo seleccionado)";
+                indicador.style.color = "#4b5563";
+                indicador.style.fontWeight = "normal";
+            }
         }
     })
     .catch(error => {
         alert("Error de conexión con el servidor");
     });
+});
+
+document.getElementById('btn-borrar-datos').addEventListener('click', function() {
+    const confirmar = confirm("¿Estás seguro de que deseas borrar todos los datos ingresados y la configuración de transporte?");
+    if (!confirmar) return;
+
+    document.getElementById('form-nuevo-proyecto').reset();
+    localStorage.removeItem('proyecto_temporal');
+    
+    const indicador = document.getElementById('txt-modelo-seleccionado');
+    if (indicador) {
+        indicador.textContent = "(Ningún modelo seleccionado)";
+        indicador.style.color = "#64748b";
+        indicador.style.fontWeight = "normal";
+    }
 });

@@ -68,6 +68,18 @@ const Proyecto = sequelize.define('Proyecto', {
     presupuesto: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    tipo_proyecto_id: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    fecha_salida: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    fecha_instalacion: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
@@ -136,10 +148,18 @@ app.post('/api/login-cliente', async (req, res) => {
 
 app.post('/api/crear-proyecto', async (req, res) => {
     try {
-        const { nombre, fecha_inicio, fecha_fin, presupuesto } = req.body;
+        const { 
+            nombre, 
+            fecha_inicio, 
+            fecha_fin, 
+            presupuesto, 
+            tipo_proyecto_id, 
+            fecha_salida, 
+            fecha_instalacion 
+        } = req.body;
 
-        if (!nombre || !fecha_inicio || !fecha_fin || !presupuesto) {
-            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+        if (!nombre || !fecha_inicio || !fecha_fin || !presupuesto || !tipo_proyecto_id || !fecha_salida || !fecha_instalacion) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios, incluyendo la configuración de transporte.' });
         }
 
         const id_proyecto = await generarIdUnicoProyecto();
@@ -149,7 +169,10 @@ app.post('/api/crear-proyecto', async (req, res) => {
             nombre,
             fecha_inicio,
             fecha_fin,
-            presupuesto
+            presupuesto,
+            tipo_proyecto_id,
+            fecha_salida,
+            fecha_instalacion
         });
 
         res.status(201).json({ 

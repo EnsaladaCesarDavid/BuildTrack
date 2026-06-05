@@ -17,10 +17,6 @@ a{
     color:white;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .barra-superior-gestion{
     width:100%;
     height:80px;
@@ -47,10 +43,6 @@ a{
     font-weight:bold;
 }
 
-/* =========================
-   CONTENEDOR PRINCIPAL
-========================= */
-
 .contenedor-layout-gestion{
     flex:1;
     padding:0 50px 90px;
@@ -61,10 +53,6 @@ a{
     min-height:78vh;
     padding:25px;
 }
-
-/* =========================
-   TITULO PROYECTO
-========================= */
 
 .titulo-proyecto{
     margin-left:100px;
@@ -80,10 +68,6 @@ a{
 .titulo-proyecto span{
     color:#ff6a00;
 }
-
-/* =========================
-   TARJETAS (CORREGIDO Y ALINEADO)
-========================= */
 
 .contenedor-columnas-metricas{
     display:flex;
@@ -116,8 +100,8 @@ a{
 }
 
 .card-metrica-interior{
-    width:100%;       /* Absorbe el nuevo ancho de la columna */
-    height:390px;     /* Caja un poco más alta y espaciosa */
+    width:100%;
+    height:390px;
 
     background:black;
     border-radius:35px;
@@ -127,14 +111,10 @@ a{
     align-items:center;
     justify-content: flex-start;
 
-    padding:25px 15px; /* Más espacio interno */
+    padding:25px 15px;
 
     color:white;
 }
-
-/* =========================
-   ICONOS
-========================= */
 
 .icono-metrica-circulo{
     font-size:2.8rem;
@@ -147,14 +127,64 @@ a{
     color:#d99a1d;
 }
 
-/* =========================
-   TEXTOS
-========================= */
-
 .card-metrica-interior h3{
     font-size:2rem;
     font-weight:bold;
     margin-bottom:5px;
+}
+
+.control-input-gestion {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    z-index: 5;
+    position: relative;
+}
+
+.control-input-gestion label {
+    font-size: 0.8rem;
+    color: #4b5563;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.control-input-gestion input {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1f2937;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.lista-detalles-avance {
+    width: 100%;
+    margin-top: 10px;
+    z-index: 5;
+    position: relative;
+}
+
+.item-porcentaje-fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+}
+
+.item-porcentaje-fila input {
+    width: 55px;
+    padding: 3px;
+    font-size: 0.85rem;
+    text-align: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 3px;
+    margin-right: 3px;
 }
 
 .sub-porcentaje{
@@ -166,10 +196,6 @@ a{
 .monto-total{
     color:#d99a1d;
 }
-
-/* =========================
-   BARRAS DE PROGRESO
-========================= */
 
 .barra-progreso{
     width:90%;
@@ -200,10 +226,6 @@ a{
     width:100%;
 }
 
-/* =========================
-   AVANCE (TEXTO ALINEADO)
-========================= */
-
 .lista-detalles-avance{
     margin-top:15px;
     width:100%;
@@ -212,10 +234,6 @@ a{
     text-align: left;    /* Alinea la lista de progreso a la izquierda dentro de la tarjeta */
     padding-left: 15px;  /* Le da un margen limpio */
 }
-
-/* =========================
-   IMAGENES
-========================= */
 
 .imagen-metrica-fondo{
     width:100%;
@@ -228,8 +246,6 @@ a{
     background-size:cover;
     background-position:center;
 }
-
-/* CAMBIA LAS RUTAS */
 
 .img-materiales{
     background-image:url("../img/materiales.jpg");
@@ -246,10 +262,6 @@ a{
 .img-casa{
     background-image:url("../img/casa.jpg");
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 .barra-inferior-gestion{
     width:100%;
@@ -269,10 +281,6 @@ a{
 
     padding:0 50px;
 }
-
-/* =========================
-   BOTONES
-========================= */
 
 .btn-inferior-izq,
 .btn-cerrar{
@@ -304,10 +312,6 @@ a{
     justify-content:center;
     align-items:center;
 }
-
-/* =========================
-   RESPONSIVE (ADAPTADO AL NUEVO ANCHO)
-========================= */
 
 @media(max-width:1200px){
 
