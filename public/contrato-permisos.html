@@ -21,19 +21,18 @@
     </header>
 
     <div class="contenedor-layout">
-        
         <aside class="menu-lateral">
-            <h3 class="titulo-menu">Administracion de proyectos</h3>
+            <h3 class="titulo-menu">Opciones</h3>
             <ul class="lista-menu">
                 <li class="item-proyectos">
-                    <a href="#">Mis proyectos</a>
-                    <ul class="sublista-proyectos">
-                        <li>-///////</li>
-                        <li>-///////</li>
-                        <li>-///////</li>
-                    </ul>
+                    <p style="font-weight: bold; margin-bottom: 5px;">Mis proyectos</p>
+                    <ul class="sublista-proyectos" id="sublista-proyectos" style="max-height: 150px; overflow-y: auto; list-style: none; padding-left: 0;">
+                        </ul>
                 </li>
             </ul>
+            <div style="margin-top: 20px;">
+                <button type="button" id="btn-gestionar-proyecto-lateral" style="width: 100%; background-color: #b45309; color: #ffffff; font-weight: bold; cursor: pointer; border: none; padding: 10px; border-radius: 4px; font-size: 0.95rem;">Gestionar Proyecto</button>
+            </div>
         </aside>
 
         <main class="contenido-panel">
@@ -113,5 +112,6 @@
         <button class="btn-regresar"><a href="menuprincipaladmin.html">Regresar</a></button>
     </footer>
 
+    <script src="./js/listaproyectos.js"></script>
 </body>
 </html>

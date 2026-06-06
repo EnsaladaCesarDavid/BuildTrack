@@ -12,8 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputPiso = document.getElementById('input-pct-piso');
 
     const btnGuardar = document.getElementById('btn-guardar-metricas');
+    const badgeProyecto = document.getElementById('proyecto-id-badge');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const idProyecto = urlParams.get('id');
+
+    if (idProyecto) {
+        if (badgeProyecto) {
+            badgeProyecto.textContent = idProyecto;
+        }
+        const proyectosGlobales = JSON.parse(localStorage.getItem('buildtrack_proyectos')) || [];
+        const proyectoEncontrado = proyectosGlobales.find(p => p.id === idProyecto);
+        if (proyectoEncontrado && inputPresupuesto) {
+            inputPresupuesto.value = proyectoEncontrado.presupuesto || 500000;
+        }
+    }
 
     function evaluarPorcentajeTexto(elemento, valorPorcentaje, sufijo) {
+        if (!elemento) return;
         elemento.textContent = `${valorPorcentaje.toFixed(0)}% ${sufijo}`;
         if (valorPorcentaje > 100) {
             elemento.style.color = '#ef4444';
@@ -25,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function evaluarPorcentajeInput(inputElemento) {
+        if (!inputElemento) return;
         const valor = parseFloat(inputElemento.value) || 0;
         if (valor > 100) {
             inputElemento.style.color = '#ef4444';
@@ -58,9 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         evaluarPorcentajeTexto(txtPctAvance, promedio, 'de Progreso Promedio');
     }
 
-    inputMaterial.addEventListener('input', recalcularPorcentajes);
-    inputGastos.addEventListener('input', recalcularPorcentajes);
-    inputPresupuesto.addEventListener('input', recalcularPorcentajes);
+    if (inputMaterial) inputMaterial.addEventListener('input', recalcularPorcentajes);
+    if (inputGastos) inputGastos.addEventListener('input', recalcularPorcentajes);
+    if (inputPresupuesto) inputPresupuesto.addEventListener('input', recalcularPorcentajes);
 
     [inputCimentacion, inputMuros, inputPiso].forEach(input => {
         if (input) {
@@ -71,34 +88,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    btnGuardar.addEventListener('click', () => {
-        const presupuesto = parseFloat(inputPresupuesto.value) || 0;
-        const material = parseFloat(inputMaterial.value) || 0;
-        const gastos = parseFloat(inputGastos.value) || 0;
+    if (btnGuardar) {
+        btnGuardar.addEventListener('click', () => {
+            const presupuesto = parseFloat(inputPresupuesto.value) || 0;
+            const material = parseFloat(inputMaterial.value) || 0;
+            const gastos = parseFloat(inputGastos.value) || 0;
 
-        const pctCimentacion = parseFloat(inputCimentacion.value) || 0;
-        const pctMuros = parseFloat(inputMuros.value) || 0;
-        const pctPiso = parseFloat(inputPiso.value) || 0;
+            const pctCimentacion = parseFloat(inputCimentacion.value) || 0;
+            const pctMuros = parseFloat(inputMuros.value) || 0;
+            const pctPiso = parseFloat(inputPiso.value) || 0;
 
-        if (presupuesto <= 0 || material < 0 || gastos < 0) {
-            alert('Por favor, ingresa montos numéricos válidos mayores o iguales a cero.');
-            return;
-        }
+            if (presupuesto <= 0 || material < 0 || gastos < 0) {
+                alert('Por favor, ingresa montos numéricos válidos mayores o iguales a cero.');
+                return;
+            }
 
-        if (pctCimentacion > 100 || pctMuros > 100 || pctPiso > 100 || pctCimentacion < 0 || pctMuros < 0 || pctPiso < 0) {
-            alert('Los porcentajes específicos de desglose de obra no pueden exceder el 100%.');
-            return;
-        }
+            if (pctCimentacion > 100 || pctMuros > 100 || pctPiso > 100 || pctCimentacion < 0 || pctMuros < 0 || pctPiso < 0) {
+                alert('Los porcentajes específicos de desglose de obra no pueden exceder el 100%.');
+                return;
+            }
 
-        const dataSuma = material + gastos;
+            const dataSuma = material + gastos;
 
-        if (dataSuma > presupuesto) {
-            alert(`Error: La suma de los conceptos financieros ($${dataSuma.toLocaleString()}) excede el presupuesto total asignado de ($${presupuesto.toLocaleString()}).`);
-            return;
-        }
+            if (dataSuma > presupuesto) {
+                alert(`Error: La suma de los conceptos financieros ($${dataSuma.toLocaleString()}) excede el presupuesto total asignado de ($${presupuesto.toLocaleString()}).`);
+                return;
+            }
 
-        alert('¡Métricas de progreso y costos actualizadas con éxito en el sistema!');
-    });
+            alert('¡Métricas de progreso y costos actualizadas con éxito en el sistema!');
+        });
+    }
 
     recalcularPorcentajes();
     evaluarPorcentajeInput(inputCimentacion);

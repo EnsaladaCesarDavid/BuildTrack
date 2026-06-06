@@ -27,14 +27,14 @@
             <h3 class="titulo-menu">Administración de proyectos</h3>
             <ul class="lista-menu">
                 <li class="item-proyectos">
-                    <a href="#">Mis proyectos</a>
-                    <ul class="sublista-proyectos lista-scrollable-admin" id="sublista-proyectos-admin">                       
-                    </ul>
+                    <p style="font-weight: bold; margin-bottom: 5px;">Mis proyectos</p>
+                    <ul class="sublista-proyectos lista-scrollable-admin" id="sublista-proyectos">
+                        </ul>
                 </li>
             </ul>
-            <div class="grupo-botones-laterales">
-                <button class="btn-lateral"><a href="./gestionarproyecto.html" class="nose">Gestionar Proyecto</a></button>
-                <button class="btn-lateral">Crear Proyecto</button>
+            <div class="grupo-botones-laterales" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                <button type="button" id="btn-gestionar-proyecto-lateral" class="btn-lateral" style="background-color: #b45309; color: #ffffff; font-weight: bold; cursor: pointer; border: none; padding: 10px; border-radius: 4px;">Gestionar Proyecto</button>
+                <button type="button" class="btn-lateral" style="cursor: pointer; border: none; padding: 10px; border-radius: 4px;">Crear Proyecto</button>
             </div>
         </aside>
 
@@ -110,6 +110,7 @@
         <a href="./bienvenido.html"><button class="btn-cerrar">Cerrar Sesion</button></a>
     </div>
 
+    <script src="./js/listaproyectos.js"></script>
     <script src="./js/crearproyecto.js"></script>
 </body>
 </html>
