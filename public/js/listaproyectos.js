@@ -58,6 +58,8 @@ function renderizarProyectosAdmin() {
             span.style.fontWeight = 'bold';
             span.style.color = '#f59e0b';
             idProyectoSeleccionado = proyecto.id;
+            
+            window.location.href = `./gestionarproyecto.html?id=${idProyectoSeleccionado}`;
         });
         
         li.appendChild(span);
