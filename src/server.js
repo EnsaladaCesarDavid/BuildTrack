@@ -25,10 +25,12 @@ app.use(session({
 const adminRouter = require('./routers/admin');
 const clienteRouter = require('./routers/cliente');
 const proyectoRouter = require('./routers/proyecto');
+const documentosRouter = require('./routers/documentos');
 
 app.use('/api', adminRouter);
 app.use('/api', clienteRouter);
 app.use('/api', proyectoRouter);
+app.use('/api', documentosRouter);
 
 async function inicializarBaseDeDatos() {
     try {
