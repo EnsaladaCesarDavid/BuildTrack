@@ -41,7 +41,7 @@ function renderizarProyectosAdmin() {
         const li = document.createElement('li');
         const span = document.createElement('span');
         
-        span.textContent = `📁 ${proyecto.nombre}`;
+        span.textContent = `${proyecto.nombre}`;
         span.title = `ID: ${proyecto.id}`;
         span.style.cursor = 'pointer';
         span.style.display = 'block';

@@ -28,83 +28,57 @@
                 <li class="item-proyectos">
                     <p style="font-weight: bold; margin-bottom: 5px;">Mis proyectos</p>
                     <ul class="sublista-proyectos" id="sublista-proyectos" style="max-height: 150px; overflow-y: auto; list-style: none; padding-left: 0;">
-                        </ul>
+                    </ul>
                 </li>
             </ul>
             <div style="margin-top: 20px;">
-                <button type="button" id="btn-gestionar-proyecto-lateral" style="width: 100%; background-color: #b45309; color: #ffffff; font-weight: bold; cursor: pointer; border: none; padding: 10px; border-radius: 4px; font-size: 0.95rem;">Gestionar Proyecto</button>
+                <button id="btn-cerrar-sesion" style="background-color: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;">Cerrar Sesión</button>
             </div>
         </aside>
 
-        <main class="contenido-panel">
-            <div class="panel-documentos">
-                <h2 class="titulo-seccion-documentos">Contratos/permisos</h2>
+        <main class="contenido-principal">
+            <div class="tarjeta-documento">
                 
-                <div class="contenedor-tarjetas-documentos">
-                    
-                    <div class="tarjeta-documento">
-                        <div class="icono-documento">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                            </svg>
-                        </div>
-                        
-                        <div class="info-documento-grupo">
-                            <span class="label-documento">Nombre del Contrato:</span>
-                            <span class="valor-documento">Contrato con Proveedor X</span>
-                        </div>
-
-                        <div class="info-documento-grupo">
-                            <span class="label-documento">ID del Contrato:</span>
-                            <span class="valor-documento">CONTRATO-001</span>
-                        </div>
-
-                        <div class="fila-metadatos-documento">
-                            <div class="info-documento-grupo">
-                                <span class="label-documento">Fecha de Firma:</span>
-                                <span class="valor-documento">15/05/26</span>
-                            </div>
-                            <div class="info-documento-grupo">
-                                <span class="label-documento">Vigencia:</span>
-                                <span class="valor-documento">24/05/27</span>
-                            </div>
-                        </div>
-
-                        <button class="btn-descargar-pdf">Descargar PDF</button>
-                    </div>
-
-                    <div class="tarjeta-documento">
-                        <div class="icono-documento">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                            </svg>
-                        </div>
-                        
-                        <div class="info-documento-grupo">
-                            <span class="label-documento">Nombre del Contrato:</span>
-                            <span class="valor-documento">Contrato de Obra Y</span>
-                        </div>
-
-                        <div class="info-documento-grupo">
-                            <span class="label-documento">ID del Contrato:</span>
-                            <span class="valor-documento">CONTRATO-0010</span>
-                        </div>
-
-                        <div class="fila-metadatos-documento">
-                            <div class="info-documento-grupo">
-                                <span class="label-documento">Fecha de Firma:</span>
-                                <span class="valor-documento">23/05/26</span>
-                            </div>
-                            <div class="info-documento-grupo">
-                                <span class="label-documento">Vigencia:</span>
-                                <span class="valor-documento">03/06/27</span>
-                            </div>
-                        </div>
-
-                        <button class="btn-descargar-pdf">Descargar PDF</button>
-                    </div>
-
+                <div class="encabezado-seccion">
+                    <h2 class="titulo-documento">Contratos / Permisos</h2>
+                    <button type="button" id="btn-mostrar-formulario" class="btn-abrir-subida" title="Subir nuevo documento">+</button>
                 </div>
+
+                <div id="contenedor-formulario-carga" class="formulario-carga-card oculto">
+                    <h3 style="margin-top: 0; margin-bottom: 15px; color: #1e293b;">Vincular Nuevo Archivo PDF</h3>
+                    <form id="form-subir-pdf">
+                        <div class="grupo-campo">
+                            <label for="input-nombre-contrato">Nombre del Contrato / Permiso:</label>
+                            <input type="text" id="input-nombre-contrato" placeholder="Ej. Contrato de Obra Civil" required>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="grupo-campo">
+                                <label for="input-fecha-firma">Fecha de Firma:</label>
+                                <input type="date" id="input-fecha-firma" required>
+                            </div>
+                            <div class="grupo-campo">
+                                <label for="input-vigencia">Fecha de Vigencia:</label>
+                                <input type="date" id="input-vigencia" required>
+                            </div>
+                        </div>
+
+                        <div class="grupo-campo" style="margin-top: 10px;">
+                            <label for="input-archivo-pdf">Seleccionar Documento (Exclusivo .pdf):</label>
+                            <input type="file" id="input-archivo-pdf" accept=".pdf" required>
+                        </div>
+
+                        <div class="contenedor-botones-form">
+                            <button type="button" id="btn-cancelar-carga" class="btn-cancelar">Cancelar</button>
+                            <button type="submit" id="btn-subir-documento" class="btn-primario">Guardar en Base de Datos</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="lista-documentos" id="contenedor-lista-documentos">
+                    <p id="mensaje-vacio" style="color: #64748b; text-align: center; font-style: italic; margin-top: 20px;">No hay documentos vinculados a este proyecto actualmente.</p>
+                </div>
+
             </div>
         </main>
     </div>
@@ -114,5 +88,25 @@
     </footer>
 
     <script src="./js/listaproyectos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnMostrar = document.getElementById('btn-mostrar-formulario');
+            const btnCancelar = document.getElementById('btn-cancelar-carga');
+            const contenedorForm = document.getElementById('contenedor-formulario-carga');
+
+            if(btnMostrar && contenedorForm) {
+                btnMostrar.addEventListener('click', () => {
+                    contenedorForm.classList.toggle('oculto');
+                });
+            }
+
+            if(btnCancelar && contenedorForm) {
+                btnCancelar.addEventListener('click', () => {
+                    contenedorForm.classList.add('oculto');
+                    document.getElementById('form-subir-pdf').reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
