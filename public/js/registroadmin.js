@@ -1,4 +1,6 @@
-document.getElementById('btn-enviar').addEventListener('click', function() {
+document.getElementById('btn-enviar').addEventListener('click', function(e) {
+    e.preventDefault(); // Evita que la página parpadee o se recargue sola cancelando el fetch
+
     const nombre = document.getElementById('nombre').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -26,23 +28,29 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
         return;
     }
 
-    fetch('http://localhost:3000/api/registro-admin', {
+    fetch('http://localhost:3000/api/admin/registro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ nombre, email, password })
     })
-    .then(response => response.json())
+    .then(response => {
+        // Convierte la respuesta a JSON sin importar si el estatus es 200 o 400
+        return response.json();
+    })
     .then(data => {
         if (data.error) {
+            // Si el servidor detectó el correo duplicado, mostrará el mensaje exacto aquí
             alert(data.error);
         } else {
+            // Si el registro fue exitoso
             alert(data.mensaje);
-            window.location.href = "./menuprincipaladmin.html";
+            window.location.href = "./iniciosesionadmin.html";
         }
     })
     .catch(error => {
+        console.error("Error en la petición fetch:", error);
         alert("Error de conexión con el servidor");
     });
 });

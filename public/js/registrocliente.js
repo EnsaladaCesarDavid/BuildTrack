@@ -12,28 +12,25 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
         alert("El nombre de usuario solo debe contener letras.");
         return;
     }
-
     if (nombre.length < 3) {
         alert("Su nombre debe contener al menos 3 caracteres.");
         return;
     }
-
     if (!regexEmail.test(email)) {
         alert("Por favor, ingresa un correo electrónico válido.");
         return;
     }
-
     if (!regexTelefono.test(telefono)) {
         alert("El número de teléfono debe contener exactamente 10 dígitos numéricos.");
         return;
     }
-
     if (password.length < 8) {
         alert("La contraseña debe tener al menos 8 caracteres.");
         return;
     }
 
-    fetch('http://localhost:3000/api/registro-cliente', {
+    // Ruta corregida a relativa
+    fetch('/api/cliente/registro', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,6 +43,7 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
             alert(data.error);
         } else {
             alert(data.mensaje);
+            // Redirección asegurada
             window.location.href = "./menuprincipalcliente.html";
         }
     })

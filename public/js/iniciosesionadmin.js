@@ -1,4 +1,6 @@
-document.getElementById('btn-enviar').addEventListener('click', function() {
+document.getElementById('btn-enviar').addEventListener('click', function(e) {
+    e.preventDefault(); // Detiene cualquier comportamiento automático de recarga
+
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
@@ -20,10 +22,14 @@ document.getElementById('btn-enviar').addEventListener('click', function() {
             alert(data.error);
         } else {
             alert("¡Bienvenido de nuevo, " + data.nombre + "!");
+            localStorage.setItem('usuarioActivo', 'true');
+            
+            // REDIRECCIÓN CORRECTA: Va directo al menú principal de administración
             window.location.href = "./menuprincipaladmin.html";
         }
     })
     .catch(error => {
+        console.error(error);
         alert("Error de conexión con el servidor");
     });
 });

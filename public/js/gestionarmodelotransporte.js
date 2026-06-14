@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const fechaSalida = new Date(inputSalida.value + 'T00:00:00');
             const fechaInstalacion = new Date(inputInstalacion.value + 'T00:00:00');
 
+            // Recuperar datos para comparar con las fechas del proyecto principal
+            const temporal = localStorage.getItem('proyecto_temporal');
+            let datosExistentes = temporal ? JSON.parse(temporal) : {};
+
             if (fechaSalida < hoy) {
                 alert("La fecha de salida del transporte no puede ser anterior al día actual.");
                 return;
@@ -46,20 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            if (fechaSalida.getTime() === fechaInstalacion.getTime()) {
-                alert("La fecha de salida y la fecha de instalación no pueden ocurrir el mismo día.");
+            // --- NUEVAS VALIDACIONES CRUZADAS DE FECHAS ---
+            if (datosExistentes.fecha_fin) {
+                const fechaFinProyecto = new Date(datosExistentes.fecha_fin + 'T00:00:00');
+                if (fechaSalida < fechaFinProyecto) {
+                    alert(`La fecha de salida del transporte no puede ser menor a la fecha estimada de finalización del proyecto (${datosExistentes.fecha_fin}).`);
+                    return;
+                }
+            } else {
+                alert("Aviso: No se ha detectado la fecha de término en el formulario principal, se guardará con la fecha elegida.");
+            }
+
+            if (fechaInstalacion <= fechaSalida) {
+                alert("La fecha de instalación de la obra debe ser posterior (al menos un día después) a la fecha de salida del transporte.");
                 return;
             }
 
-            if (fechaInstalacion < fechaSalida) {
-                alert("La fecha de instalación de la obra no puede ser anterior a la fecha de salida del transporte.");
-                return;
-            }
-
-            let datosExistentes = {};
-            const temporal = localStorage.getItem('proyecto_temporal');
-            if (temporal) datosExistentes = JSON.parse(temporal);
-
+            // Guardar datos completos
             datosExistentes.tipo_proyecto_id = selectTipo.value;
             datosExistentes.tipo_proyecto_texto = selectTipo.options[selectTipo.selectedIndex].text;
             datosExistentes.fecha_salida = inputSalida.value;

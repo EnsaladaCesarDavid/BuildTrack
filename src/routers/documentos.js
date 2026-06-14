@@ -5,17 +5,22 @@ const path = require('path');
 const fs = require('fs');
 const db = require('../db/database');
 
+// Resolver la ruta de uploads de forma ABSOLUTA desde la raíz del proyecto
+const carpetaUploads = path.resolve(__dirname, '../../uploads');
+
+if (!fs.existsSync(carpetaUploads)){
+    fs.mkdirSync(carpetaUploads, { recursive: true });
+    console.log("📁 Carpeta 'uploads/' verificada en:", carpetaUploads);
+}
+
+// Configurar almacenamiento físico absoluto para guardar los archivos PDF
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const dir = './uploads/pdfs';
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        cb(null, dir);
+    destination: (req, file, cb) => {
+        cb(null, carpetaUploads);
     },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    filename: (req, file, cb) => {
+        const sufijoUnico = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'expediente-' + sufijoUnico + path.extname(file.originalname));
     }
 });
 
@@ -23,91 +28,107 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'application/pdf') {
         cb(null, true);
     } else {
-        cb(new Error('Formato inválido. Solo se permiten archivos .pdf'), false);
+        cb(new Error('Tipo de archivo no permitido. Solo se aceptan PDFs.'), false);
     }
 };
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-router.post('/proyectos/:id_proyecto/documento', upload.single('pdf_contrato'), async (req, res) => {
+// Asegurar estructura limpia al iniciar y forzar uso de la base de datos
+setTimeout(async () => {
     try {
-        const { id_proyecto } = req.params;
-        const { nombre_contrato, fecha_firma, vigencia } = req.body;
+        await db.query(`USE buildtrack_db;`); 
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS documentos_proyecto (
+                id_documento INT AUTO_INCREMENT PRIMARY KEY,
+                id_proyecto VARCHAR(50) NOT NULL,
+                nombre_contrato VARCHAR(255) NOT NULL,
+                fecha_firma DATE,
+                vigencia DATE,
+                ruta_archivo VARCHAR(255) NOT NULL,
+                archivo_nombre_original VARCHAR(255) NOT NULL,
+                fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+        console.log("⚙️ Tabla 'documentos_proyecto' lista y sincronizada.");
+    } catch (err) {
+        console.error("❌ Error inicializando tabla:", err.message);
+    }
+}, 500);
+
+
+// --- ENDPOINT: SUBIR ARCHIVO PDF Y REGISTRAR ---
+router.post('/documento/subir', upload.single('pdf_contrato'), async (req, res) => {
+    try {
+        const { id_proyecto, nombre_contrato, fecha_firma, vigencia } = req.body;
 
         if (!req.file) {
-            return res.status(400).json({ error: 'Es obligatorio subir un archivo PDF.' });
+            return res.status(400).json({ error: 'No se recibió ningún archivo PDF válido.' });
         }
 
-        // Insertar en la Base de Datos
-        const [resultado] = await db.execute(
-            `INSERT INTO documentos_proyecto 
-            (id_proyecto, nombre_contrato, fecha_firma, vigencia, archivo_nombre_original, archivo_ruta) 
-            VALUES (?, ?, ?, ?, ?, ?)`,
-            [id_proyecto, nombre_contrato, fecha_firma, vigencia, req.file.originalname, req.file.path]
-        );
+        const rutaArchivoPublica = 'uploads/' + req.file.filename;
+        const nombreOriginal = req.file.originalname;
 
-        res.status(201).json({ 
-            mensaje: 'Documento subido y vinculado con éxito', 
-            id_documento: resultado.insertId 
-        });
+        await db.query(`USE buildtrack_db;`); 
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Error interno al procesar el archivo' });
-    }
-});
-
-router.put('/documento/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { nombre_contrato, fecha_firma, vigencia } = req.body;
-
-        await db.execute(
-            `UPDATE documentos_proyecto 
-             SET nombre_contrato = ?, fecha_firma = ?, vigencia = ? 
-             WHERE id = ?`,
-            [nombre_contrato, fecha_firma, vigencia, id]
-        );
-
-        res.status(200).json({ mensaje: 'Metadatos del documento actualizados con éxito' });
-    } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar el documento' });
-    }
-});
-
-router.get('/proyectos/:id_proyecto/documentos', async (req, res) => {
-    try {
-        const [rows] = await db.execute(
-            'SELECT id, nombre_contrato, fecha_firma, vigencia, archivo_nombre_original FROM documentos_proyecto WHERE id_proyecto = ?',
-            [req.params.id_proyecto]
-        );
-        res.status(200).json(rows);
-    } catch (error) {
-        res.status(500).json({ error: 'Error al obtener documentos' });
-    }
-});
-
-router.get('/documento/:id/descargar', async (req, res) => {
-    try {
-        const [rows] = await db.execute(
-            'SELECT archivo_ruta, archivo_nombre_original FROM documentos_proyecto WHERE id = ?',
-            [req.params.id]
-        );
-
-        if (rows.length === 0) {
-            return res.status(404).json({ error: 'El archivo solicitado no existe.' });
-        }
-
-        const { archivo_ruta, archivo_nombre_original } = rows[0];
+        const query = `
+            INSERT INTO documentos_proyecto (id_proyecto, nombre_contrato, fecha_firma, vigencia, ruta_archivo, archivo_nombre_original)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
         
-        if (!fs.existsSync(archivo_ruta)) {
-            return res.status(404).json({ error: 'El archivo físico fue eliminado del servidor.' });
-        }
+        await db.query(query, [
+            id_proyecto, 
+            nombre_contrato, 
+            fecha_firma || null, 
+            vigencia || null, 
+            rutaArchivoPublica,
+            nombreOriginal
+        ]);
 
-        res.download(archivo_ruta, archivo_nombre_original);
+        return res.status(201).json({ mensaje: 'Documento subido y registrado exitosamente.' });
 
     } catch (error) {
-        res.status(500).json({ error: 'Error al procesar la descarga' });
+        console.error("❌ ERROR CRÍTICO EN EL ENDPOINT DE SUBIDA:", error);
+        return res.status(500).json({ 
+            error: 'Fallo interno en el servidor.',
+            detalle: error.message 
+        });
+    }
+});
+
+// --- ENDPOINT: ENCONTRAR TODOS LOS DOCUMENTOS (Sincronizado con el Frontend) ---
+router.get('/documentos-proyecto/:id_proyecto', async (req, res) => {
+    try {
+        let idProyecto = req.params.id_proyecto;
+        
+        if (idProyecto && typeof idProyecto === 'string') {
+            idProyecto = idProyecto.replace(/['"]/g, '').trim();
+        }
+
+        await db.query(`USE buildtrack_db;`); 
+
+        const query = `
+            SELECT 
+                id_documento, 
+                id_proyecto, 
+                nombre_contrato, 
+                fecha_firma, 
+                vigencia, 
+                ruta_archivo,
+                ruta_archivo AS archivo_ruta,
+                archivo_nombre_original,
+                fecha_registro 
+            FROM documentos_proyecto 
+            WHERE id_proyecto = ? 
+            ORDER BY fecha_registro DESC
+        `;
+        
+        const [documentos] = await db.query(query, [idProyecto]);
+        return res.json(documentos);
+
+    } catch (error) {
+        console.error("❌ Error consultando documentos:", error);
+        return res.status(500).json({ error: 'Error al consultar la base de datos.' });
     }
 });
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./css/menuprincipalcliente.css">
+    <link rel="stylesheet" href="./css/menuprincipalcliente.css">
     <title>Menú Principal - Cliente</title>
 </head>
 <body>
@@ -33,10 +33,10 @@
                         <button type="button" id="btn-agregar-proyecto" class="btn-mas">+</button>
                     </div>
                     <ul id="sublista-proyectos" class="lista-scrollable">
-                    </ul>
+                        </ul>
                 </li>
             </ul>
-            <button class="btn-visualizar">Visualizar Proyecto</button>
+            <button class="btn-visualizar" id="btn-visualizar-proyecto">Visualizar Proyecto</button>
         </aside>
 
         <main class="contenido-galeria">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="barra-inferior">
-        <a href="./iniciosesioncliente.html"><button class="btn-cerrar">Cerrar Sesion</button></a>
+        <button type="button" id="btn-logout-cliente" class="btn-cerrar" style="cursor: pointer;">Cerrar Sesion</button>
     </div>
 
     <script src="./js/proyectoscliente.js"></script>

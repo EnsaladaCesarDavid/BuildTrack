@@ -1,8 +1,10 @@
-if (!localStorage.getItem('usuarioActivo')) {
-    window.location.replace('./iniciosesionadmin.html');
-}
+const usuarioActivo = localStorage.getItem('usuarioActivo');
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (usuarioActivo == 'false') {
+        window.location.replace('./iniciosesionadmin.html');
+    }
+    
     const btnCerrarSesion = document.getElementById('btn-cerrar-sesion');
     
     if (btnCerrarSesion) {
@@ -12,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ordenarSalida = confirm('¿Estás seguro de que desea cerrar sesión?');
             
             if (ordenarSalida) {
-                localStorage.removeItem('usuarioActivo');
+                localStorage.setItem('usuarioActivo', 'false');
                 window.location.replace('./iniciosesionadmin.html');
             }
         });

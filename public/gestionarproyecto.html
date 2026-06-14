@@ -3,25 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/cerrarsesion.js"></script>
     <link rel="stylesheet" href="./css/gestionarproyecto.css">
     <title>Gestión de Proyecto - BuildTrack</title>
-    <style>
-        .titulo-metrica {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #1e293b;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .subtitulo-metrica {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: #64748b;
-            margin-bottom: 8px;
-            display: block;
-        }
-    </style>
 </head>
 <body>
 
@@ -33,76 +16,345 @@
     <div class="contenedor-layout-gestion">
         <main class="dashboard-gestion">
             
-            <div class="contenedor-columnas-metricas">
-                <div class="columna-metrica">
-                    <h4 class="subtitulo-metrica">Material</h4>
-                    <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">📦</div>
-                        <div class="control-input-gestion">
-                            <label>Monto:</label>
-                            <input type="number" id="input-material" min="0">
-                        </div>
-                        <p class="sub-porcentaje" id="txt-pct-material">0% del presupuesto</p>
-                        <div class="imagen-metrica-fondo img-materiales"></div>
+            <div class="panel-datos-maestros">
+                <div class="bloque-maestro widget-presupuesto">
+                    <label>Presupuesto Total</label>
+                    <div class="campo-bloqueado-wrapper">
+                        <span class="simbolo">$</span>
+                        <input type="text" id="input-presupuesto" readonly value="500,000">
                     </div>
                 </div>
 
-                <div class="columna-metrica">
-                    <h3 class="titulo-metrica">Gastos <br><small style="font-size:0.85rem; font-weight:normal; color: #64748b;">Permisos</small></h3>
-                    <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">📋</div>
-                        <div class="control-input-gestion">
-                            <label>Monto:</label>
-                            <input type="number" id="input-gastos" min="0">
+                <div class="bloque-maestro">
+                    <label>Cronograma General</label>
+                    <div class="grupo-fechas">
+                        <div class="control-fecha">
+                            <span>Inicio:</span>
+                            <input type="date" id="input-fecha-inicio">
                         </div>
-                        <p class="sub-porcentaje" id="txt-pct-gastos">0% del presupuesto</p>
-                        <div class="imagen-metrica-fondo img-contrato"></div>
-                    </div>
-                </div>
-
-                <div class="columna-metrica">
-                    <h4 class="subtitulo-metrica">Avance de la vivienda</h4>
-                    <div class="card-metrica-interior items-lista-avance">
-                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">🏠</div>
-                        <p class="sub-porcentaje" id="txt-pct-avance" style="font-size: 1.1rem; margin-top: 15px; margin-bottom: 15px;">0% de Progreso Promedio</p>
-                        <div class="lista-detalles-avance">
-                            <div class="item-porcentaje-fila">
-                                <label>Cimentación:</label>
-                                <input type="number" id="input-pct-cimentacion" min="0" max="100">%
-                            </div>
-                            <div class="item-porcentaje-fila">
-                                <label>Muros:</label>
-                                <input type="number" id="input-pct-muros" min="0" max="100">%
-                            </div>
-                            <div class="item-porcentaje-fila">
-                                <label>Piso:</label>
-                                <input type="number" id="input-pct-piso" min="0" max="100">%
-                            </div>
+                        <div class="control-fecha">
+                            <span>Finalización:</span>
+                            <input type="date" id="input-fecha-fin">
                         </div>
-                    </div>
-                </div>
-
-                <div class="columna-metrica">
-                    <h3 class="titulo-metrica">Presupuesto</h3>
-                    <div class="card-metrica-interior">
-                        <div class="icono-metrica-circulo" style="font-size: 1.6rem; display: flex; align-items: center; justify-content: center;">💰</div>
-                        <div class="control-input-gestion">
-                            <label>Total:</label>
-                            <input type="number" id="input-presupuesto" value="500000" min="1">
+                        <div class="control-fecha">
+                            <span>Salida Planta:</span>
+                            <input type="date" id="input-fecha-salida">
                         </div>
-                        <p class="sub-porcentaje">Total de Presupuesto</p>
-                        <div class="imagen-metrica-fondo img-personal"></div>
+                        <div class="control-fecha">
+                            <span>Instalación:</span>
+                            <input type="date" id="input-fecha-instalacion">
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="panel-monitoreo-progreso">
+                
+                <div class="bloque-maestro">
+                    <label>📊 Distribución de Recursos Financieros</label>
+                    <div class="grafica-simulada-barras">
+                        <div class="barra-financiera">
+                            <div class="info-barra-txt">
+                                <span>Inversión en Materiales</span>
+                                <b id="txt-pct-material">0% del presupuesto</b>
+                            </div>
+                            <input type="number" id="input-material" class="input-financiero-directo" placeholder="Monto $">
+                        </div>
+
+                        <div class="barra-financiera">
+                            <div class="info-barra-txt">
+                                <span>Gastos Operativos / Mano de Obra</span>
+                                <b id="txt-pct-gastos">0% del presupuesto</b>
+                            </div>
+                            <input type="number" id="input-gastos" class="input-financiero-directo" placeholder="Monto $">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bloque-maestro">
+                    <label>🏗️ Avance Físico de Obra Modular</label>
+                    <div class="contenedor-sliders-fases">
+                        
+                        <div class="control-slider-grupo">
+                            <div class="encabezado-slider">
+                                <span>Fase 1: Cimentación y Anclajes</span>
+                            </div>
+                            <input type="range" id="input-pct-cimentacion" min="0" max="100" value="0">
+                        </div>
+
+                        <div class="control-slider-grupo">
+                            <div class="encabezado-slider">
+                                <span>Fase 2: Estructura y Muros</span>
+                            </div>
+                            <input type="range" id="input-pct-muros" min="0" max="100" value="0">
+                        </div>
+
+                        <div class="control-slider-grupo">
+                            <div class="encabezado-slider">
+                                <span>Fase 3: Acabados e Instalaciones</span>
+                            </div>
+                            <input type="range" id="input-pct-piso" min="0" max="100" value="0">
+                        </div>
+
+                        <div class="marcador-total-promedio">
+                            <span id="txt-pct-avance">0% de Progreso Promedio</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bloque-maestro" style="margin-top: 25px; background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); width: 100%; box-sizing: border-box;">
+                <label style="font-size: 1.2rem; font-weight: bold; color: #1e293b; margin-bottom: 15px; display: block;">📄 Expediente Legal y Documentos del Proyecto</label>
+                <div id="visor-documentos-gestion" style="display: flex; flex-direction: column; gap: 10px;">
+                    <p style="color: #64748b; font-style: italic; text-align: center;">Cargando expedientes digitales asociados...</p>
+                </div>
+            </div>
+
         </main>
     </div>
 
-    <div class="barra-inferior-gestion" style="display: flex; gap: 15px; justify-content: center; align-items: center;">
-        <button type="button" id="btn-guardar-metricas" class="btn-cerrar" style="background-color: #d97706; color: #ffffff; cursor: pointer;">Guardar Cambios</button>
-        <button class="btn-cerrar"><a href="menuprincipaladmin.html" style="color: inherit; text-decoration: none;">Regresar</a></button>
+    <div class="barra-inferior-gestion">
+        <button type="button" id="btn-regresar-menu-fijo" class="btn-cerrar-volver">Regresar al Menú</button>
+        <button type="button" id="btn-guardar-metricas" class="btn-guardar-cambios">Guardar Datos de Gestión</button>
     </div>
 
-    <script src="./js/gestionarproyecto.js"></script>
+    <script>
+        document.getElementById('btn-regresar-menu-fijo').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = './menuprincipaladmin.html';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputMaterial = document.getElementById('input-material');
+            const inputGastos = document.getElementById('input-gastos');
+            const inputPresupuesto = document.getElementById('input-presupuesto');
+
+            const txtPctMaterial = document.getElementById('txt-pct-material');
+            const txtPctGastos = document.getElementById('txt-pct-gastos');
+            const txtPctAvance = document.getElementById('txt-pct-avance');
+
+            const inputCimentacion = document.getElementById('input-pct-cimentacion');
+            const inputMuros = document.getElementById('input-pct-muros');
+            const inputPiso = document.getElementById('input-pct-piso');
+
+            const inputFechaInicio = document.getElementById('input-fecha-inicio');
+            const inputFechaFin = document.getElementById('input-fecha-fin');
+            const inputFechaSalida = document.getElementById('input-fecha-salida');
+            const inputFechaInstalacion = document.getElementById('input-fecha-instalacion');
+
+            const btnGuardar = document.getElementById('btn-guardar-metricas') || document.querySelector('button');
+            const badgeProyecto = document.getElementById('proyecto-id-badge');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let idProyecto = urlParams.get('id') || localStorage.getItem('proyecto_seleccionado_id');
+
+            function formatearFechaISO(fechaCompleta) {
+                if (!fechaCompleta) return '';
+                return fechaCompleta.split('T')[0];
+            }
+
+            if (idProyecto) {
+                if (badgeProyecto) badgeProyecto.textContent = idProyecto;
+                
+                fetch(`http://localhost:3000/api/proyecto/${idProyecto}`)
+                    .then(res => {
+                        if(!res.ok) throw new Error("Proyecto no encontrado");
+                        return res.json();
+                    })
+                    .then(proyectoReal => {
+                        if (inputPresupuesto) {
+                            const valorPresupuesto = parseFloat(proyectoReal.presupuesto) || 0;
+                            inputPresupuesto.value = valorPresupuesto.toLocaleString('en-US');
+                            inputPresupuesto.readOnly = true;
+                        }
+
+                        if (inputMaterial) inputMaterial.value = proyectoReal.material || 0;
+                        if (inputGastos) inputGastos.value = proyectoReal.gastos || 0;
+                        if (inputCimentacion) inputCimentacion.value = proyectoReal.cimentacion || 0;
+                        if (inputMuros) inputMuros.value = proyectoReal.muros || 0;
+                        if (inputPiso) inputPiso.value = proyectoReal.piso || 0;
+
+                        if (inputFechaInicio) inputFechaInicio.value = formatearFechaISO(proyectoReal.fecha_inicio);
+                        if (inputFechaFin) inputFechaFin.value = formatearFechaISO(proyectoReal.fecha_fin);
+                        if (inputFechaSalida) inputFechaSalida.value = formatearFechaISO(proyectoReal.fecha_salida);
+                        if (inputFechaInstalacion) inputFechaInstalacion.value = formatearFechaISO(proyectoReal.fecha_instalacion);
+
+                        recalcularPorcentajes();
+                    })
+                    .catch(err => console.error("Error al leer specifications del servidor:", err));
+
+                consultarExpedientesDelProyecto(idProyecto);
+            } else {
+                const divVisor = document.getElementById('visor-documentos-gestion');
+                if (divVisor) {
+                    divVisor.innerHTML = '<p style="color: #ef4444; font-style: italic; text-align: center;">Error: No se localizó un parámetro ID válido en la URL.</p>';
+                }
+            }
+
+            function evaluarPorcentajeTexto(elemento, valorPorcentaje, sufijo) {
+                if (!elemento) return;
+                elemento.textContent = `${valorPorcentaje.toFixed(0)}% ${sufijo}`;
+                elemento.style.color = valorPorcentaje > 100 ? '#ef4444' : '#4b5563';
+            }
+
+            function recalcularPorcentajes() {
+                const presupuesto = parseFloat(inputPresupuesto?.value.replace(/,/g, '')) || 0;
+                const material = parseFloat(inputMaterial?.value) || 0;
+                const gastos = parseFloat(inputGastos?.value) || 0;
+
+                if (presupuesto > 0) {
+                    evaluarPorcentajeTexto(txtPctMaterial, (material / presupuesto) * 100, 'del presupuesto');
+                    evaluarPorcentajeTexto(txtPctGastos, (gastos / presupuesto) * 100, 'del presupuesto');
+                }
+
+                const promedio = ((parseFloat(inputCimentacion?.value) || 0) + (parseFloat(inputMuros?.value) || 0) + (parseFloat(inputPiso?.value) || 0)) / 3;
+                evaluarPorcentajeTexto(txtPctAvance, promedio, 'de Progreso Promedio');
+            }
+
+            if (inputMaterial) inputMaterial.addEventListener('input', recalcularPorcentajes);
+            if (inputGastos) inputGastos.addEventListener('input', recalcularPorcentajes);
+            [inputCimentacion, inputMuros, inputPiso].forEach(i => i?.addEventListener('input', recalcularPorcentajes));
+
+            if (btnGuardar) {
+                btnGuardar.addEventListener('click', async (e) => {
+                    e.preventDefault();
+
+                    if (!idProyecto && badgeProyecto && badgeProyecto.textContent) {
+                        idProyecto = badgeProyecto.textContent.trim();
+                    }
+
+                    if (!idProyecto || idProyecto === "" || idProyecto.includes("Error")) {
+                        alert('❌ Error: No se detectó un identificador de proyecto válido.');
+                        return;
+                    }
+
+                    const fInicioVal = inputFechaInicio ? inputFechaInicio.value : '';
+                    const fFinVal = inputFechaFin ? inputFechaFin.value : '';
+                    const fSalidaVal = inputFechaSalida ? inputFechaSalida.value : '';
+                    const fInstalacionVal = inputFechaInstalacion ? inputFechaInstalacion.value : '';
+
+                    const fInicio = new Date(fInicioVal);
+                    const fFin = new Date(fFinVal);
+                    const fSalida = new Date(fSalidaVal);
+                    const fInstalacion = new Date(fInstalacionVal);
+
+                    if (fInicioVal && fFinVal && fFin < fInicio) {
+                        alert('Cronograma inválido:\nLa finalización de la construcción no puede ser previa al día de inicio.');
+                        return;
+                    }
+                    if (fFinVal && fSalidaVal && fSalida < fFin) {
+                        alert('Cronograma inválido:\nLa casa modular no puede salir/trasladarse antes de que termine su construcción en fábrica.');
+                        return;
+                    }
+                    if (fSalidaVal && fInstalacionVal && fInstalacion < fSalida) {
+                        alert('Cronograma inválido:\nLa casa no puede ser instalada en el terreno antes de la fecha en que sale de la fábrica.');
+                        return;
+                    }
+
+                    const datosProyectoBackend = {
+                        id: idProyecto,
+                        id_proyecto: idProyecto,
+                        presupuesto: inputPresupuesto ? parseFloat(inputPresupuesto.value.replace(/,/g, '')) || 0 : 0,
+                        material: inputMaterial ? parseFloat(inputMaterial.value) || 0 : 0,
+                        gastos: inputGastos ? parseFloat(inputGastos.value) || 0 : 0,
+                        cimentacion: inputCimentacion ? parseFloat(inputCimentacion.value) || 0 : 0,
+                        muros: inputMuros ? parseFloat(inputMuros.value) || 0 : 0,
+                        piso: inputPiso ? parseFloat(inputPiso.value) || 0 : 0,
+                        fecha_inicio: fInicioVal,
+                        fecha_fin: fFinVal,
+                        fecha_salida: fSalidaVal,
+                        fecha_instalacion: fInstalacionVal
+                    };
+
+                    try {
+                        const respuesta = await fetch('http://localhost:3000/api/proyectos/actualizar', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(datosProyectoBackend)
+                        });
+
+                        const resultadoServidor = await respuesta.json().catch(() => ({}));
+
+                        if (respuesta.ok) {
+                            alert('🎉 ¡Especificaciones y cronograma de fechas actualizados con éxito en MySQL!');
+                            window.location.reload();
+                        } else {
+                            alert(`❌ El servidor rechazó los datos: ${resultadoServidor.error || 'Verifica los parámetros enviados.'}`);
+                        }
+                    } catch (error) {
+                        alert('❌ Error de red al intentar conectar con el servidor.');
+                    }
+                });
+            }
+        });
+
+        function consultarExpedientesDelProyecto(idProyecto) {
+            const divVisor = document.getElementById('visor-documentos-gestion');
+            if (!divVisor) return;
+
+            fetch(`http://localhost:3000/api/documentos-proyecto/${idProyecto}`)
+                .then(res => res.json())
+                .then(documentos => {
+                    divVisor.innerHTML = ''; 
+
+                    if (!documentos || documentos.length === 0) {
+                        divVisor.innerHTML = `
+                            <p style="color: #94a3b8; font-style: italic; text-align: center; padding: 15px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; width: 100%; box-sizing: border-box;">
+                                No se han cargado contratos ni permisos para este proyecto desde el módulo documental.
+                            </p>
+                        `;
+                        return;
+                    }
+
+                    documentos.forEach(doc => {
+                        const filaDoc = document.createElement('div');
+                        filaDoc.style.display = 'flex';
+                        filaDoc.style.justifyContent = 'space-between';
+                        filaDoc.style.alignItems = 'center';
+                        filaDoc.style.padding = '12px 16px';
+                        filaDoc.style.background = '#f8fafc';
+                        filaDoc.style.border = '1px solid #e2e8f0';
+                        filaDoc.style.borderRadius = '8px';
+                        filaDoc.style.width = '100%';
+                        filaDoc.style.boxSizing = 'border-box';
+
+                        const fFirma = doc.fecha_firma ? new Date(doc.fecha_firma).toLocaleDateString('es-MX') : 'No estipulada';
+                        const fVence = doc.vigencia ? new Date(doc.vigencia).toLocaleDateString('es-MX') : 'Vigencia permanente';
+                        const rutaCompletaPDF = `http://localhost:3000/${doc.ruta_archivo}`;
+
+                        filaDoc.innerHTML = `
+                            <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+                                <span style="font-weight: bold; color: #1e293b; font-size: 0.98rem;">📄 ${doc.nombre_contrato}</span>
+                                <span style="font-size: 0.82rem; color: #64748b;">
+                                    <b>Firma:</b> ${fFirma} | <b>Vencimiento:</b> ${fVence}
+                                </span>
+                            </div>
+                            <a href="${rutaCompletaPDF}" target="_blank" style="
+                                background: #ff8c2b; 
+                                color: white; 
+                                text-decoration: none; 
+                                padding: 8px 16px; 
+                                border-radius: 6px; 
+                                font-weight: bold; 
+                                font-size: 0.85rem;
+                                box-shadow: 0 2px 4px rgba(255,140,43,0.15);
+                                display: inline-block;
+                                text-align: center;
+                            ">
+                                Ver Documento
+                            </a>
+                        `;
+                        
+                        divVisor.appendChild(filaDoc);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error cargando los PDFs adjuntos:", error);
+                    divVisor.innerHTML = '<p style="color: #ef4444; font-style: italic; text-align: center;">Error de comunicación al consultar el repositorio de archivos.</p>';
+                });
+        }
+    </script>
 </body>
 </html>

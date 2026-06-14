@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen Informativo del Proyecto - BuildTrack</title>
+    <style>
+        :root {
+            --azul-oscuro: #1e293b;
+            --azul-fondo: #0f172a;
+            --naranja: #ff8c2b;
+            --gris-texto: #64748b;
+            --gris-borde: #cbd5e1;
+            --blanco: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--azul-oscuro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Barra Superior */
+        .header-resumen {
+            background-color: var(--azul-oscuro);
+            color: var(--blanco);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-resumen h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .badge-id {
+            background-color: var(--naranja);
+            color: var(--blanco);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Contenedor Principal */
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Tarjeta Principal */
+        .tarjeta-informacion {
+            background: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .titulo-seccion {
+            font-size: 1.25rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--naranja);
+            display: inline-block;
+        }
+
+        /* Grid de Especificaciones */
+        .grid-campos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .campo-informativo {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .campo-informativo label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gris-texto);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .campo-informativo .valor-bloqueado {
+            background-color: #f1f5f9;
+            border: 1px solid var(--gris-borde);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        /* Sección de Avances Visuales */
+        .seccion-progreso {
+            background-color: #111827;
+            color: var(--blanco);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .seccion-progreso h3 {
+            color: var(--blanco);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .control-progreso {
+            margin-bottom: 18px;
+        }
+
+        .info-progreso {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .info-progreso .porcentaje {
+            color: var(--naranja);
+            font-weight: bold;
+        }
+
+        .barra-progreso {
+            width: 100%;
+            height: 8px;
+            background-color: #374151;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .relleno-progreso {
+            height: 100%;
+            background-color: var(--naranja);
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Barra Inferior de Navegación */
+        .barra-inferior {
+            background-color: var(--azul-oscuro);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .btn-regresar {
+            background-color: transparent;
+            color: var(--blanco);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-regresar:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--blanco);
+        }
+
+        .copy-footer {
+            color: var(--gris-texto);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-resumen">
+        <h2 id="txt-nombre-proyecto">Cargando Resumen del Proyecto...</h2>
+        <div class="badge-id" id="badge-proyecto-id">PROJ-XXXXX</div>
+    </header>
+
+    <main class="main-content">
+        <div class="tarjeta-informacion">
+            <h3 class="titulo-seccion">📋 Especificaciones y Resumen de Obra</h3>
+            
+            <div class="grid-campos">
+                <div class="campo-informativo">
+                    <label>Presupuesto Total Contratado</label>
+                    <div class="valor-bloqueado" id="info-presupuesto">$0.00</div>
+                </div>
+
+                <div class="campo-informativo">
+                    <label>Inversión Actual Materiales</label>
+                    <div class="valor-bloqueado" id="info-materiales">$0.00</div>
+                </div>
+
+                <div class="campo-informativo">
+                    <label>Mano de Obra y Gastos Operativos</label>
+                    <div class="valor-bloqueado" id="info-gastos">$0.00</div>
+                </div>
+            </div>
+
+            <div class="grid-campos">
+                <div class="campo-informativo">
+                    <label>Fecha Estimada de Inicio</label>
+                    <div class="valor-bloqueado" id="info-fecha-inicio">--/--/----</div>
+                </div>
+
+                <div class="campo-informativo">
+                    <label>Fecha Finalización de Obra</label>
+                    <div class="valor-bloqueado" id="info-fecha-fin">--/--/----</div>
+                </div>
+            </div>
+
+            <div class="grid-campos">
+                <div class="campo-informativo">
+                    <label>Logística: Salida de Planta</label>
+                    <div class="valor-bloqueado" id="info-fecha-salida">--/--/----</div>
+                </div>
+
+                <div class="campo-informativo">
+                    <label>Logística: Instalación en Sitio</label>
+                    <div class="valor-bloqueado" id="info-fecha-instalacion">--/--/----</div>
+                </div>
+            </div>
+
+            <div class="seccion-progreso">
+                <h3>🚧 Estado y Avance de la Construcción</h3>
+                
+                <div class="control-progreso">
+                    <div class="info-progreso">
+                        <span>Cimentación y Estructura</span>
+                        <span class="porcentaje" id="pct-cimentacion">0%</span>
+                    </div>
+                    <div class="barra-progreso">
+                        <div class="relleno-progreso" id="bar-cimentacion"></div>
+                    </div>
+                </div>
+
+                <div class="control-progreso">
+                    <div class="info-progreso">
+                        <span>Levantamiento de Muros</span>
+                        <span class="porcentaje" id="pct-muros">0%</span>
+                    </div>
+                    <div class="barra-progreso">
+                        <div class="relleno-progreso" id="bar-muros"></div>
+                    </div>
+                </div>
+
+                <div class="control-progreso">
+                    <div class="info-progreso">
+                        <span>Acabados e Instalación de Piso</span>
+                        <span class="porcentaje" id="pct-piso">0%</span>
+                    </div>
+                    <div class="barra-progreso">
+                        <div class="relleno-progreso" id="bar-piso"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="barra-inferior">
+        <button class="btn-regresar" onclick="window.location.href='./menuprincipalcliente.html'">⬅ Volver al Menú</button>
+        <p class="copy-footer">BuildTrack Ecosistema Digital © 2026</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const idProyecto = localStorage.getItem('proyecto_seleccionado_id');
+            
+            if (!idProyecto) {
+                alert('Por favor, selecciona un proyecto válido.');
+                window.location.href = './menuprincipalcliente.html';
+                return;
+            }
+
+            try {
+                // Sincronizado de manera exacta a la ruta global de Express
+                const response = await fetch(`/api/proyecto/${idProyecto}`);
+                if (!response.ok) throw new Error('Error al obtener datos');
+                
+                const proj = await response.json();
+
+                // Dibujar campos informativos en los contenedores
+                document.getElementById('txt-nombre-proyecto').textContent = proj.nombre || 'Proyecto Asignado';
+                document.getElementById('badge-proyecto-id').textContent = proj.id_proyecto;
+                
+                document.getElementById('info-presupuesto').textContent = '$' + parseFloat(proj.presupuesto || 0).toLocaleString('es-MX');
+                document.getElementById('info-materiales').textContent = '$' + parseFloat(proj.material || 0).toLocaleString('es-MX');
+                document.getElementById('info-gastos').textContent = '$' + parseFloat(proj.gastos || 0).toLocaleString('es-MX');
+
+                // Formateo e inyección de fechas
+                document.getElementById('info-fecha-inicio').textContent = proj.fecha_inicio ? proj.fecha_inicio.split('T')[0] : 'No asignada';
+                document.getElementById('info-fecha-fin').textContent = proj.fecha_fin ? proj.fecha_fin.split('T')[0] : 'No asignada';
+                document.getElementById('info-fecha-salida').textContent = proj.fecha_salida ? proj.fecha_salida.split('T')[0] : 'No asignada';
+                document.getElementById('info-fecha-instalacion').textContent = proj.fecha_instalacion ? proj.fecha_instalacion.split('T')[0] : 'No asignada';
+
+                // Modificación de las barras estéticas horizontales de progreso
+                const modulos = ['cimentacion', 'muros', 'piso'];
+                modulos.forEach(campo => {
+                    const valor = proj[campo] || 0;
+                    document.getElementById(`pct-${campo}`).textContent = `${valor}%`;
+                    document.getElementById(`bar-${campo}`).style.width = `${valor}%`;
+                });
+
+            } catch (error) {
+                console.error(error);
+                alert('No se pudo mapear la información del resumen informativo.');
+            }
+        });
+    </script>
+</body>
+</html>

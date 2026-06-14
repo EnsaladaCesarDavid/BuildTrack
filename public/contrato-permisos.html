@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/cerrarsesion.js"></script>
     <title>Contratos y Permisos</title>
     <link rel="stylesheet" href="css/contrato-permisos.css">
 </head>
@@ -17,7 +16,7 @@
             <h2>Administrador</h2>
         </div>
         <div class="contenedor-id-proyecto">
-            <span class="etiqueta-id-proyecto">id_proyecto</span>
+            <span class="etiqueta-id-proyecto" id="proyecto-id-badge">Seleccione un proyecto</span>
         </div>
     </header>
 
@@ -27,13 +26,10 @@
             <ul class="lista-menu">
                 <li class="item-proyectos">
                     <p style="font-weight: bold; margin-bottom: 5px;">Mis proyectos</p>
-                    <ul class="sublista-proyectos" id="sublista-proyectos" style="max-height: 150px; overflow-y: auto; list-style: none; padding-left: 0;">
+                    <ul class="sublista-proyectos" id="sublista-proyectos" style="max-height: 250px; overflow-y: auto; list-style: none; padding-left: 0;">
                     </ul>
                 </li>
             </ul>
-            <div style="margin-top: 20px;">
-                <button id="btn-cerrar-sesion" style="background-color: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;">Cerrar Sesión</button>
-            </div>
         </aside>
 
         <main class="contenido-principal">
@@ -75,8 +71,8 @@
                     </form>
                 </div>
 
-                <div class="lista-documentos" id="contenedor-lista-documentos">
-                    <p id="mensaje-vacio" style="color: #64748b; text-align: center; font-style: italic; margin-top: 20px;">No hay documentos vinculados a este proyecto actualmente.</p>
+                <div class="lista-documentos" id="contenedor-lista-documentos" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+                    <p id="mensaje-vacio" style="color: #64748b; text-align: center; font-style: italic;">Por favor, seleccione un proyecto del menú lateral para gestionar sus expedientes.</p>
                 </div>
 
             </div>
@@ -84,29 +80,9 @@
     </div>
 
     <footer class="barra-inferior">
-        <button class="btn-regresar"><a href="menuprincipaladmin.html">Regresar</a></button>
+        <button class="btn-regresar"><a href="menuprincipaladmin.html" style="color: inherit; text-decoration: none;">Regresar al Menú</a></button>
     </footer>
 
-    <script src="./js/listaproyectos.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnMostrar = document.getElementById('btn-mostrar-formulario');
-            const btnCancelar = document.getElementById('btn-cancelar-carga');
-            const contenedorForm = document.getElementById('contenedor-formulario-carga');
-
-            if(btnMostrar && contenedorForm) {
-                btnMostrar.addEventListener('click', () => {
-                    contenedorForm.classList.toggle('oculto');
-                });
-            }
-
-            if(btnCancelar && contenedorForm) {
-                btnCancelar.addEventListener('click', () => {
-                    contenedorForm.classList.add('oculto');
-                    document.getElementById('form-subir-pdf').reset();
-                });
-            }
-        });
-    </script>
+    <script src="./js/contrato-permisos.js"></script>
 </body>
 </html>
